@@ -6,7 +6,7 @@ import os
 class GetHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        cmd=["python", os.environ['RUN_SCRIPT']]
+        cmd=["python", os.environ['RUN_SCRIPT'].replace('"', '')]
         parsed_path = urlparse.urlparse(self.path)
         params = urlparse.parse_qs(parsed_path.query)
         for key, value in params.items():
