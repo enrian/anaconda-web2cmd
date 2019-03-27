@@ -1,4 +1,5 @@
 FROM continuumio/anaconda3
 RUN mkdir /script/
 COPY web2cmd.py /script/
-CMD ['python2', '/script/web2cmd.py']
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
