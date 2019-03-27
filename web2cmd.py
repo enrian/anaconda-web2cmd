@@ -17,19 +17,8 @@ class GetHandler(BaseHTTPRequestHandler):
         self.wfile.write(output)
         return
 
-    def do_POST(self):
-        content_len = int(self.headers.getheader('content-length'))
-        post_body = self.rfile.read(content_len)
-        self.send_response(200)
-        self.end_headers()
-
-        data = json.loads(post_body)
-
-        self.wfile.write(data['foo'])
-        return
-
 if __name__ == '__main__':
     from BaseHTTPServer import HTTPServer
-    server = HTTPServer(('0.0.0.0', os.environ['PORT']), GetHandler)
+    server = HTTPServer(('0.0.0.0', int(os.environ['PORT'])), GetHandler)
     print('Starting server at http://0.0.0.0:8080')
     server.serve_forever()
